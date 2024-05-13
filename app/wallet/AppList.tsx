@@ -1,7 +1,8 @@
 import { PlayIcon } from "@heroicons/react/24/outline";
 
+const appCount = Array.from({ length: 4 }, (_, i) => i + 1);
+
 export function AppList() {
-	const appCount = Array.from({ length: 4 }, (_, i) => i + 1);
 	return (
 		<ul className="grid grid-cols-2 items-center justify-between w-full gap-4 p-2">
 			{appCount.map((i) => (

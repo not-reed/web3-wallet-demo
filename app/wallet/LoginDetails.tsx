@@ -1,4 +1,4 @@
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import {
 	addressAtom,
 	nameAtom,
@@ -9,10 +9,10 @@ import { ClipboardDocumentIcon } from "@heroicons/react/24/outline";
 import { useCopyToClipboard } from "../hooks/useCopyToClipboard";
 
 export function LoginDetails() {
-	const [truncatedAddress] = useAtom(truncatedAddressAtom);
-	const [address] = useAtom(addressAtom);
-	const [name] = useAtom(nameAtom);
-	const [social] = useAtom(socialAtom);
+	const truncatedAddress = useAtomValue(truncatedAddressAtom);
+	const address = useAtomValue(addressAtom);
+	const name = useAtomValue(nameAtom);
+	const social = useAtomValue(socialAtom);
 	const copy = useCopyToClipboard();
 
 	return (

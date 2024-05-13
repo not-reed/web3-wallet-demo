@@ -5,22 +5,39 @@ import {
 	PaperAirplaneIcon,
 	QrCodeIcon,
 } from "@heroicons/react/24/outline";
-import { openAtom, screenAtom, socialAtom, tabAtom } from "./state";
-import { useAtom } from "jotai";
+import {
+	addressAtom,
+	loggedInAtom,
+	nameAtom,
+	openAtom,
+	screenAtom,
+	socialAtom,
+	tabAtom,
+} from "./state";
+import { useSetAtom } from "jotai";
 import { useCallback } from "react";
+import { web3auth } from "./web3Auth";
 
 export function ActionTabs() {
-	const [, setScreen] = useAtom(screenAtom);
-	const [, setTab] = useAtom(tabAtom);
-	const [, setSocial] = useAtom(socialAtom);
-	const [, setOpen] = useAtom(openAtom);
+	const setScreen = useSetAtom(screenAtom);
+	const setTab = useSetAtom(tabAtom);
+	const setSocial = useSetAtom(socialAtom);
+	const setOpen = useSetAtom(openAtom);
+	const setLoggedIn = useSetAtom(loggedInAtom);
+	const setAddress = useSetAtom(addressAtom);
+	const setName = useSetAtom(nameAtom);
 
-	const logout = useCallback(() => {
+	const logout = useCallback(async () => {
+		await web3auth.logout();
 		setScreen("home");
 		setTab("tokens");
 		setSocial(null);
 		setOpen(false);
-	}, [setScreen, setTab, setSocial, setOpen]);
+
+		setLoggedIn(false);
+		setAddress("");
+		setName("");
+	}, [setScreen, setTab, setSocial, setOpen, setLoggedIn, setAddress, setName]);
 
 	return (
 		<div className="flex items-center justify-center">

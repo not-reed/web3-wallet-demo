@@ -2,15 +2,14 @@ import {
 	ArrowUturnLeftIcon,
 	ClipboardDocumentIcon,
 } from "@heroicons/react/24/outline";
-import { LoginDetails } from "../LoginDetails";
-import { useAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { addressAtom, screenAtom } from "../state";
 import { useCopyToClipboard } from "@/app/hooks/useCopyToClipboard";
 import QRCode from "react-qr-code";
 
 export function ReceiveScreen() {
-	const [, setScreen] = useAtom(screenAtom);
-	const [address] = useAtom(addressAtom);
+	const setScreen = useSetAtom(screenAtom);
+	const address = useAtomValue(addressAtom);
 	const copy = useCopyToClipboard();
 
 	return (

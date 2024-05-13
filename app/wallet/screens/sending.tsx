@@ -1,12 +1,12 @@
 import { ArrowUturnLeftIcon } from "@heroicons/react/24/outline";
 import { screenAtom } from "../state";
-import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import { isAddress } from "viem";
 import { useMemo, useState } from "react";
 import clsx from "clsx";
 
 export function SendScreen() {
-	const [, setScreen] = useAtom(screenAtom);
+	const setScreen = useSetAtom(screenAtom);
 
 	const [to, setTo] = useState("");
 	const [amount, setAmount] = useState("");
@@ -36,6 +36,7 @@ export function SendScreen() {
 					className={clsx(
 						"input input-bordered w-full max-w-xs",
 						to && !isValidAddress && "input-error",
+						to && isValidAddress && "input-success",
 					)}
 				/>
 			</div>
@@ -55,7 +56,10 @@ export function SendScreen() {
 					value={amount}
 					onChange={(e) => setAmount(e.target.value)}
 					placeholder="0.0"
-					className="border-l pl-2 w-full max-w-xs"
+					className={clsx(
+						"border-l pl-2 w-full max-w-xs",
+						amount && isValidAddress && "input-success",
+					)}
 				/>
 			</div>
 			<button

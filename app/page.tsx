@@ -1,5 +1,5 @@
 import { AnimateLogo } from "./AnimateLogo";
-import { HappyWallet } from "./components/HappyWallet";
+import { HappyWallet } from "./wallet/HappyWallet";
 
 export default function Home() {
 	return (
